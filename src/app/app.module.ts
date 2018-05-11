@@ -9,6 +9,8 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {ZBar} from "@ionic-native/zbar";
+import {Ndef, NFC} from "@ionic-native/nfc";
 
 @NgModule({
   declarations: [
@@ -31,6 +33,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    ZBar,
+    NFC,
+    Ndef,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
