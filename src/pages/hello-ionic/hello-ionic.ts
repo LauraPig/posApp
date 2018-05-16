@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {ZBar, ZBarOptions} from "@ionic-native/zbar";
 import {NavController} from "ionic-angular";
-import {Ndef, NFC} from "@ionic-native/nfc";
+import {NFC} from "@ionic-native/nfc";
 
 @Component({
   selector: 'page-hello-ionic',
@@ -12,9 +12,13 @@ export class HelloIonicPage {
     private navCtrl: NavController,
     private zbar: ZBar,
     private nfc: NFC,
-    private ndef: Ndef,
+    // private ndef: Ndef,
 
   ) {
+    // nfc.addNdefListener().subscribe((event) => {
+    //   alert('监测...');
+    //   alert(JSON.stringify(event));
+    // });
 
   }
 
@@ -38,6 +42,15 @@ export class HelloIonicPage {
   }
 
   nfcTest () {
+
+    // this.nfc.beginSession().subscribe(() => {
+    //   this.nfc.addNdefListener(() => {
+    //     alert('监测...');
+    //     alert('IOS'); // You will not see this, at this point the app will crash
+    //   }).subscribe(res => {
+    //     alert(res);
+    //   });
+    // });
     // this.nfc.addNdefListener(() => {
     //   alert('successfully attached ndef listener');
     // }, (err) => {
@@ -52,11 +65,30 @@ export class HelloIonicPage {
     //   // let message = this.ndef.textRecord('Hello world');
     //   // this.nfc.share([message]).then(isSuccess).catch(onerror);
     // });
-    this.nfc.addNdefListener().subscribe((event) => {
+
+    this.nfc.addTagDiscoveredListener(() => {
+      console.log("added a TagDiscover listener");
+
+    }, (err) => {
+      console.log(err);
+    }).subscribe((event) => {
+      console.log("Tag spotted!");
       alert('监测...');
-      alert(JSON.stringify(event));
+      alert('ID：' + this.nfc.bytesToHexString(event.tag.id));
     });
+
+    //
+    // this.nfc.addNdefListener(() => {
+    //   alert('添加成功');
+    // }, (err) => {
+    //   console.log(err);
+    //   alert('添加失败');
+    // }).subscribe((data) => {
+    //   alert('监测...');
+    //   alert(JSON.stringify(data));
+    // });
   }
+
 
 
 //   this.nfc.addNdefListener().subscribe((event) => {
