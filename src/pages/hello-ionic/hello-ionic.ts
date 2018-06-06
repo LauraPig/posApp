@@ -73,8 +73,8 @@ export class HelloIonicPage {
       console.log(err);
     }).subscribe((event) => {
       console.log("Tag spotted!");
-      alert('监测...');
-      alert('ID：' + this.nfc.bytesToHexString(event.tag.id));
+      // alert('监测...');
+      alert('CardID：' + this.nfc.bytesToHexString(event.tag.id));
     });
 
     //
