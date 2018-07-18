@@ -3,11 +3,14 @@ import {ZBar, ZBarOptions} from "@ionic-native/zbar";
 import {NavController} from "ionic-angular";
 import {NFC} from "@ionic-native/nfc";
 
+
 @Component({
   selector: 'page-hello-ionic',
   templateUrl: 'hello-ionic.html'
 })
 export class HelloIonicPage {
+
+  listener: any;
   constructor(
     private navCtrl: NavController,
     private zbar: ZBar,
@@ -20,6 +23,10 @@ export class HelloIonicPage {
     //   alert(JSON.stringify(event));
     // });
 
+  }
+  ionViewDidLoad() {
+    // let time = moment('11').format('YYYY-MM-DD HH:mm:ss');
+    // console.log('time---> ', time);
   }
 
   qrScan() {
@@ -39,6 +46,13 @@ export class HelloIonicPage {
       .catch(error => {
         alert(error); // Error message
       });
+  }
+  ionViewWillLeave() {
+
+  }
+
+  animateTest() {
+    this.navCtrl.push('job-details');
   }
 
   nfcTest () {
@@ -66,7 +80,7 @@ export class HelloIonicPage {
     //   // this.nfc.share([message]).then(isSuccess).catch(onerror);
     // });
 
-    this.nfc.addTagDiscoveredListener(() => {
+    this.listener = this.nfc.addTagDiscoveredListener(() => {
       console.log("added a TagDiscover listener");
 
     }, (err) => {
@@ -76,6 +90,9 @@ export class HelloIonicPage {
       // alert('监测...');
       alert('CardID：' + this.nfc.bytesToHexString(event.tag.id));
     });
+
+
+
 
     //
     // this.nfc.addNdefListener(() => {

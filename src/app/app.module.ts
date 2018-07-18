@@ -11,6 +11,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {ZBar} from "@ionic-native/zbar";
 import {NFC} from "@ionic-native/nfc";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {SharedModule} from "../modules/shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import {NFC} from "@ionic-native/nfc";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),
+    SharedModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
